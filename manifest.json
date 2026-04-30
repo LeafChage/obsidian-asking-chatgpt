@@ -1,0 +1,10 @@
+{
+  "id": "chatgpt",
+  "name": "ChatGPT",
+  "version": "1.0.0",
+  "minAppVersion": "0.15.0",
+  "description": "generate text from title with prompt",
+  "author": "LeafChage",
+  "authorUrl": "https://github.com/LeafChage",
+  "isDesktopOnly": false
+}
