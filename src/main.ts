@@ -13,9 +13,7 @@ export class ChatGPTPlugin extends Plugin {
       id: 'chatgpt-ask-update-file',
       name: 'Ask ChatGPT',
       callback: async () => {
-        new Notice("Processing...");
         await askChatGPT(this.app, this.settings)
-        new Notice("Done!");
       },
     });
 
