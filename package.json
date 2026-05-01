@@ -3,7 +3,9 @@
   "type": "module",
   "private": true,
   "main": "main.js",
-  "scripts": {},
+  "scripts": {
+    "release": "bash ./cmd/release.bash"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
