@@ -1,6 +1,6 @@
 {
   "id": "chatgpt",
-  "name": "ChatGPT",
+  "name": "Ask GPT Title",
   "version": "1.0.0",
   "minAppVersion": "0.15.0",
   "description": "generate text from title with prompt",

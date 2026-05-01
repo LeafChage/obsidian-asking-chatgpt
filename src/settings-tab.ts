@@ -1,5 +1,6 @@
 import { App, PluginSettingTab, SecretComponent, Setting } from "obsidian";
 import { ChatGPTPlugin } from "./main";
+import { FolderSuggest } from "./folder-suggestion";
 
 export class ChatGPTPluginSettingTab extends PluginSettingTab {
   plugin: ChatGPTPlugin;
@@ -37,16 +38,18 @@ export class ChatGPTPluginSettingTab extends PluginSettingTab {
       );
 
     new Setting(containerEl)
-      .setName("Prompt")
-      .setDesc("What do you want to order to ChatGPT")
-      .addTextArea(text => text
-        .setPlaceholder("you can use <%= it.title %> to include title name")
-        .setValue(this.plugin.settings.prompt ?? "")
-        .onChange(async (value) => {
-          this.plugin.settings.prompt = value;
+      .setName("Prompt Directory")
+      .addText(text => {
+        const onChange = async (value: string) => {
+          this.plugin.settings.promptDir = value;
           await this.plugin.saveSettings();
-        })
-      );
+        };
+        text.setPlaceholder("where is your prompt directory")
+          .setValue(this.plugin.settings.promptDir ?? "")
+          .onChange(onChange)
+
+        new FolderSuggest(this.app, text.inputEl, onChange);
+      });
   }
 }
 
