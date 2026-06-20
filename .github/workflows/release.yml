@@ -25,7 +25,7 @@ jobs:
       - name: Build
         run: |
           bun install
-          bun build ./build.ts
+          bun run ./build.ts
 
       - name: Making zip
         run: |
