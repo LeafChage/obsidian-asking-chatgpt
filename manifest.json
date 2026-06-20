@@ -1,7 +1,7 @@
 {
   "id": "chatgpt",
   "name": "Ask GPT Title",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "minAppVersion": "0.15.0",
   "description": "generate text from title with prompt",
   "author": "LeafChage",
