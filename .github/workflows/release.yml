@@ -14,13 +14,22 @@ jobs:
       - name: Bun setup
         uses: oven-sh/setup-bun@v2
 
+      - name: jq setup
+        uses: sergeysova/jq-action@v2
+
+      - name: get version
+        id: get-version
+        run: |
+          echo "version=$(cat manifest.json | jq -r .version)" >> $GITHUB_OUTPUT
+
       - name: Build
         run: |
           bun install
           bun build ./build.ts
 
       - name: Making zip
-        run: zip obsidian-asking-chatgpt.zip main.js manifest.json
+        run: |
+          zip obsidian-asking-chatgpt.zip main.js manifest.json
 
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
@@ -28,5 +37,5 @@ jobs:
             repo_token: ${{ secrets.GITHUB_TOKEN }}
             file: obsidian-asking-chatgpt.zip
             asset_name: obsidian-asking-chatgpt.zip
-            tag: ${{ github.ref }}
+            tag: ${{ steps.get-version.outputs.version }}
             overwrite: true
