@@ -1,0 +1,32 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    name: build-release
+    steps:
+      - name: Checkout Repos
+        uses: actions/checkout@v4
+
+      - name: Bun setup
+        uses: over-sh/setup-bun@v2
+
+      - name: Build
+        run: |
+          bun install
+          bun build ./build.ts
+
+      - name: Making zip
+        run: zip obsidian-asking-chatgpt.zip main.js manifest.json
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+            repo_token: ${{ secrets.GITHUB_TOKEN }}
+            file: obsidian-asking-chatgpt.zip
+            asset_name: obsidian-asking-chatgpt.zip
+            tag: ${{ github.ref }}
+            overwrite: true
