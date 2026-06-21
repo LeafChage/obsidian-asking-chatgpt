@@ -1,9 +1,10 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - "*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build-and-release:
@@ -39,5 +40,5 @@ jobs:
             repo_token: ${{ secrets.GITHUB_TOKEN }}
             file: obsidian-asking-chatgpt.zip
             asset_name: obsidian-asking-chatgpt.zip
-            tag: ${{ github.ref }}
+            tag: ${{ steps.get-version.outputs.version }}
             overwrite: true
